@@ -42,11 +42,16 @@ recurse_copy("fonts", "html/fonts");
 
 foreach(glob("*.php") as $_file) {
 
-    if ($_file == "pages.php" || $_file == "export.php") continue;
+    if ($_file == "export.php") continue;
 
     ob_start();
     include $_file;
     $_html = ob_get_contents();
+
+    if ($_file == "pages.php") {
+        // reemplazamos los links
+        $_html = str_replace(".php", ".html", $_html);
+    }
     ob_end_clean();
 
     file_put_contents("html/".str_replace("php", "html", $_file), $_html);
