@@ -30,6 +30,10 @@ function recurse_copy($src,$dst,$ignore = array()) {
     closedir($dir);
 }
 
+if (!file_exists(__DIR__."/html") && !mkdir(__DIR__."/html")) {
+    die("Tiene que existir el directorio /html");
+}
+
 // copio assets
 recurse_copy("css", "html/css");
 recurse_copy("js", "html/js");
