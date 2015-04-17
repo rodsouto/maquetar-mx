@@ -14,6 +14,10 @@ function recurse_copy($src,$dst,$ignore = array()) {
         return;
     }
 
+    if (!file_exists($src)) {
+        throw new Exception("Invalid file: $src");
+    }
+
     $dir = opendir($src);
 
     @mkdir($dst);
